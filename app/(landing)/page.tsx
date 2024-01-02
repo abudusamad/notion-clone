@@ -1,3 +1,4 @@
+import Footer from "./_components/Footer";
 import Heading from "./_components/Heading";
 import Hero from "./_components/Hero";
 
@@ -8,6 +9,7 @@ const LandingPage = () => {
 				<Heading />
 				<Hero/>
 			</div>
+			<Footer/>
 		</div>
 	);
 };
