@@ -4,12 +4,12 @@ import Hero from "./_components/Hero";
 
 const LandingPage = () => {
 	return (
-		<div className="min-h-full flex flex-col ">
+		<div className="min-h-full flex flex-col dark:bg-[#1F1F1F]">
 			<div className="flex flex-col items-center justify-center gap-y-8 flex-1 px-6 pb-10">
 				<Heading />
-				<Hero/>
+				<Hero />
 			</div>
-			<Footer/>
+			<Footer />
 		</div>
 	);
 };

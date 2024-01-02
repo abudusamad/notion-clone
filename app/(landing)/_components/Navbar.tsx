@@ -11,7 +11,7 @@ import { ModeToggle } from "@/components/media-toggle";
 const Navbar = () => {
 	const { isAuthenticated, isLoading } = useConvexAuth();
 	return (
-		<div className="z-50 bg-background fixed top-0 flex items-center w-full">
+		<div className="z-50 bg-background fixed top-0 flex items-center w-full dark:bg-[#1F1F1F]">
 			<Logo />
 			<div className="md:ml-auto md:justify-end justify-between w-full flex items-center gap-x-2">
 				{isLoading && <Spinner />}
@@ -38,8 +38,7 @@ const Navbar = () => {
 					</>
 				)}
 				<div className="mr-2">
-
-				<ModeToggle/>
+					<ModeToggle />
 				</div>
 			</div>
 		</div>
