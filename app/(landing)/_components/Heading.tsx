@@ -1,5 +1,6 @@
 "use client";
 
+import { Spinner } from "@/components/spinner";
 import { Button } from "@/components/ui/button";
 import { SignInButton } from "@clerk/clerk-react";
 import { useConvexAuth } from "convex/react";
@@ -20,7 +21,7 @@ const Heading = () => {
 			</h3>
 			{isLoading && (
 				<div className="w-full flex items-center justify-center">
-					<span>Loading...</span>
+					<Spinner size="lg"/>
 				</div>
 			)}
 			{isAuthenticated && !isLoading && (
