@@ -1,11 +1,12 @@
 "use client";
 
 import { Spinner } from "@/components/spinner";
-import { useConvexAuth } from "convex/react";
-import { Logo } from "./Logo";
-import { SignInButton, UserButton } from "@clerk/clerk-react";
 import { Button } from "@/components/ui/button";
+import { SignInButton, UserButton } from "@clerk/clerk-react";
+import { useConvexAuth } from "convex/react";
 import Link from "next/link";
+import { Logo } from "./Logo";
+import { ModeToggle } from "@/components/media-toggle";
 
 const Navbar = () => {
 	const { isAuthenticated, isLoading } = useConvexAuth();
@@ -22,26 +23,24 @@ const Navbar = () => {
 							</Button>
 						</SignInButton>
 						<SignInButton mode="modal">
-							<Button  size="sm" className="mr-2">
-								Get Notion  free
+							<Button size="sm" className="mr-2">
+								Get Notion free
 							</Button>
 						</SignInButton>
 					</>
-                )}
-                {!isLoading && isAuthenticated && (
-                    <>
-                        <Button>
-                            <Link href="/documents">
-                                Enter Notion
-                            </Link>
-                        </Button>
-                        <UserButton
-                            afterSignOutUrl="/"
-                        
-                         />
-                    </>
-                )
-                }
+				)}
+				{!isLoading && isAuthenticated && (
+					<>
+						<Button>
+							<Link href="/documents">Enter Notion</Link>
+						</Button>
+						<UserButton afterSignOutUrl="/" />
+					</>
+				)}
+				<div className="mr-2">
+
+				<ModeToggle/>
+				</div>
 			</div>
 		</div>
 	);
