@@ -10,8 +10,8 @@ export const Logo = () => {
 	return (
 		<div className="flex items-center gap-x-2">
 			<Image
-                width={100}
-                height={100}
+                width={120}
+                height={120}
 				alt="Logo"
 				src="/Notion.svg"
 				className={cn("font-semibold ", font.className)}
