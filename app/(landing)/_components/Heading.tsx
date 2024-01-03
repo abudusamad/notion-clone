@@ -24,21 +24,26 @@ const Heading = () => {
 				</div>
 			)}
 			{isAuthenticated && !isLoading && (
+				<div className="w-full flex items-center justify-center">
+
 				<Button asChild>
 					<Link href="/documents">
 						Enter Notion
 						<ArrowRight className=" h-4 w-4 ml-2" />
 					</Link>
 				</Button>
+				</div>
 			)}
 
 			{!isAuthenticated && !isLoading && (
-				<SignInButton mode="modal">
-					<Button>
-						Get Notion for free
-						<ArrowRight className="h-4 w-4 ml-2" />
-					</Button>
-				</SignInButton>
+				<div className="w-full flex items-center justify-center">
+					<SignInButton mode="modal">
+						<Button>
+							Get Notion for free
+							<ArrowRight className="h-4 w-4 ml-2" />
+						</Button>
+					</SignInButton>
+				</div>
 			)}
 		</div>
 	);
