@@ -1,11 +1,17 @@
-"use client ";
-import { Button } from "@/components/ui/button";
+"use client";
+
 import { useUser } from "@clerk/clerk-react";
 import { PlusCircle } from "lucide-react";
 import Image from "next/image";
 
-const DocumentPage = () => {
+import { useRouter } from "next/navigation";
+
+import { Button } from "@/components/ui/button";
+
+const DocumentsPage = () => {
+	const router = useRouter();
 	const { user } = useUser();
+
 	return (
 		<div className="h-full flex flex-col items-center justify-center space-y-4">
 			<Image
@@ -33,4 +39,4 @@ const DocumentPage = () => {
 	);
 };
 
-export default DocumentPage;
+export default DocumentsPage;
