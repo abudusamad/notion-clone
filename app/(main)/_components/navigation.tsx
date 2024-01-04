@@ -1,17 +1,22 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { ChevronLeft, MenuIcon } from "lucide-react";
-import { useParams, usePathname } from "next/navigation";
-import { ElementRef, useEffect, useRef, useState } from "react";
-import { useMediaQuery } from "usehooks-ts";
-import { UserItem } from "./user-item";
-import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { cn } from "@/lib/utils";
+import { useMutation, useQuery } from "convex/react";
+import { ChevronLeft, MenuIcon } from "lucide-react";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import { ElementRef, useEffect, useRef, useState } from "react";
+import { toast } from "sonner";
+import { useMediaQuery } from "usehooks-ts";
+import Navbar from "./navbar";
+import { UserItem } from "./user-item";
 
 const Navigation = () => {
 	const isMobile = useMediaQuery("(max-width: 768px)");
 	const pathname = usePathname();
+	const params = useParams();
+	const router = useRouter();
+	const create = useMutation(api.documents.create);
 
 	const isResizingRef = useRef(false);
 	const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -19,7 +24,7 @@ const Navigation = () => {
 	const [isResetting, setIsResetting] = useState(false);
 	const [isCollapsed, setIsCollapsed] = useState(isMobile);
 
-	const data = useQuery(api.documents.get)
+	const data = useQuery(api.documents.get);
 
 	useEffect(() => {
 		if (isMobile) {
@@ -92,6 +97,18 @@ const Navigation = () => {
 		}
 	};
 
+	const handleCreate = () => {
+		const promise = create({ title: "Untilted" }).then((documentId) =>
+			router.push(`/documents/${documentId}`)
+		);
+
+		toast.promise(promise, {
+			loading: "Creating document...",
+			success: "Document created!",
+			error: "Error creating document",
+		});
+	};
+
 	return (
 		<>
 			<aside
@@ -137,15 +154,19 @@ const Navigation = () => {
 					isMobile && "left-0 w-full"
 				)}
 			>
-				<nav className="bg-transparent px-3 py-2 w-full">
-					{isCollapsed && (
-						<MenuIcon
-							onClick={resetWidth}
-							role="button"
-							className="h-6 w-6 text-muted-foreground"
-						/>
-					)}
-				</nav>
+				{!!params.documentId ? (
+					<Navbar isCollapsed={isCollapsed} onResetWidth={resetWidth} />
+				) : (
+					<nav className="bg-transparent px-3 py-2 w-full">
+						{isCollapsed && (
+							<MenuIcon
+								onClick={resetWidth}
+								role="button"
+								className="h-6 w-6 text-muted-foreground"
+							/>
+						)}
+					</nav>
+				)}
 			</div>
 		</>
 	);
