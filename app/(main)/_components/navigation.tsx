@@ -5,6 +5,7 @@ import { ChevronLeft, MenuIcon } from "lucide-react";
 import { useParams, usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
+import { UserItem } from "./user-item";
 
 const Navigation = () => {
 	const isMobile = useMediaQuery("(max-width: 768px)");
@@ -107,7 +108,9 @@ const Navigation = () => {
 				>
 					<ChevronLeft className="h-6 w-6" />
 				</div>
-				<div>sideItem</div>
+				<div>
+					<UserItem/>
+				</div>
 				<div
 					className="mt-3
                 "
