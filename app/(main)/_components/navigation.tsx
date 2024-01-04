@@ -6,6 +6,8 @@ import { useParams, usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { UserItem } from "./user-item";
+import { useMutation, useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
 
 const Navigation = () => {
 	const isMobile = useMediaQuery("(max-width: 768px)");
@@ -16,6 +18,8 @@ const Navigation = () => {
 	const navbarRef = useRef<ElementRef<"div">>(null);
 	const [isResetting, setIsResetting] = useState(false);
 	const [isCollapsed, setIsCollapsed] = useState(isMobile);
+
+	const data = useQuery(api.documents.get)
 
 	useEffect(() => {
 		if (isMobile) {
@@ -109,13 +113,15 @@ const Navigation = () => {
 					<ChevronLeft className="h-6 w-6" />
 				</div>
 				<div>
-					<UserItem/>
+					<UserItem />
 				</div>
 				<div
 					className="mt-3
                 "
 				>
-					root
+					{data?.map((datas) => (
+						<p key={datas._id}>{datas.title}</p>
+					))}
 				</div>
 				<div
 					onMouseDown={handleMouseDown}
