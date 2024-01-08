@@ -11,6 +11,7 @@ import { useMediaQuery } from "usehooks-ts";
 import Navbar from "./navbar";
 import { UserItem } from "./user-item";
 import { Item } from "./item";
+import useSearch from "@/app/hooks/use-search";
 
 const Navigation = () => {
 	const isMobile = useMediaQuery("(max-width: 768px)");
@@ -18,6 +19,7 @@ const Navigation = () => {
 	const params = useParams();
 	const router = useRouter();
 	const create = useMutation(api.documents.create);
+	const search = useSearch();
 
 	const isResizingRef = useRef(false);
 	const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -136,7 +138,7 @@ const Navigation = () => {
 						label="Search"
 						icon={Search}
 						isSearch
-						onClick={() => router.push("/search")}
+						onClick={search.onOpen}
 					/>
 					<Item
 						onClick={handleCreate}
