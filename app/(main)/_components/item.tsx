@@ -51,7 +51,7 @@ export const Item = ({
 			<span className="truncate">{label}</span>
 			{isSearch && (
 				<kbd className="ml-auto pointer-events-none inline-flex h-5 selected-none gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100">
-					<span className="tex-xs">Clt</span>K
+					<span className="tex-xs">clt</span>K
 				</kbd>
 			)}
 		</div>

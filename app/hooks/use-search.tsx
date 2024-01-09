@@ -8,7 +8,7 @@ type SearchStore = {
 }
 
 const useSearch = create<SearchStore>((set, get) => ({
-    isOpen: true,
+    isOpen: false,
     onOpen: () => set({ isOpen: true }),
     onClose: () => set({ isOpen: false }),
     toggle: () => set({ isOpen: !get().isOpen })
