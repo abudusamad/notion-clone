@@ -11,7 +11,7 @@ import { useMediaQuery } from "usehooks-ts";
 import Navbar from "./navbar";
 import { UserItem } from "./user-item";
 import { Item } from "./item";
-import useSearch from "@/app/hooks/use-search";
+import { useSearch } from "@/app/hooks/use-search";
 
 const Navigation = () => {
 	const isMobile = useMediaQuery("(max-width: 768px)");

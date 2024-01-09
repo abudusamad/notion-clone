@@ -1,6 +1,7 @@
 "use client";
 
-import useSearch from "@/app/hooks/use-search";
+
+import { useSearch } from "@/app/hooks/use-search";
 import {
 	CommandDialog,
 	CommandEmpty,
@@ -13,8 +14,6 @@ import { useEffect, useState } from "react";
 
 export const SearchCommand = () => {
 	const [isMounted, setIsMounted] = useState(false);
-
-
 
 	const toggle = useSearch((store) => store.toggle);
 	const isOpen = useSearch((store) => store.isOpen);
@@ -29,6 +28,7 @@ export const SearchCommand = () => {
 			if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
 				e.preventDefault();
 				toggle();
+				console.log(toggle())
 			}
 		};
 		document.addEventListener("keydown", down);
