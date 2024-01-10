@@ -10,7 +10,7 @@ interface ItemProps {
 	expanded?: boolean;
 	isSearch?: boolean;
 	level?: number;
-	onExapand?: () => void;
+	onExpand?: () => void;
 	onClick: () => void;
 	label: string;
 	icon: LucideIcon;
@@ -24,7 +24,7 @@ export const Item = ({
 	expanded,
 	isSearch,
 	level = 0,
-	onExapand,
+	onExpand,
 	documentIcon,
 	id,
 }: ItemProps) => {
