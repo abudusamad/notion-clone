@@ -1,7 +1,30 @@
+"use client";
+
+import {
+	ChevronDown,
+	ChevronRight,
+	LucideIcon,
+	MoreHorizontal,
+	Plus,
+	Trash
+} from "lucide-react";
+
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { useUser } from "@clerk/clerk-react";
+import { useMutation } from "convex/react";
+
 import { Skeleton } from "@/components/ui/skeleton";
+import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
-import { ChevronDown, ChevronRight, LucideIcon } from "lucide-react";
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
 
 interface ItemProps {
 	id?: Id<"documents">;
@@ -11,7 +34,7 @@ interface ItemProps {
 	isSearch?: boolean;
 	level?: number;
 	onExpand?: () => void;
-	onClick: () => void;
+	onClick?: () => void;
 	label: string;
 	icon: LucideIcon;
 }
@@ -28,6 +51,32 @@ export const Item = ({
 	documentIcon,
 	id,
 }: ItemProps) => {
+	const { user } = useUser();
+	const router = useRouter();
+	const create = useMutation(api.documents.create);
+
+
+	const handleExpand = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		event.stopPropagation();
+		onExpand?.();
+	}
+
+	const onCreate = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+		event.stopPropagation();
+		if (!id) return;
+		const promise = create({ title: "Untitle", parentDocumet: id })
+			.then((DocumentId) => {
+				if (!expanded) {
+					onExpand?.();
+				}
+				router.push(`/document/${DocumentId}`);
+			})
+		toast.promise(promise, {
+			loading: "Creating a new note ...",
+			success: "New note created",
+			error: "Failed to create new note.",
+		});
+	}
 	const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
 	return (
@@ -41,7 +90,11 @@ export const Item = ({
 			)}
 		>
 			{!!id && (
-				<div className="h-full rounded-sm hover:bg-neutral-300 mr-1 ">
+				<div className="h-full rounded-sm hover:bg-neutral-300 mr-1
+				"
+					role="button"
+					onClick={handleExpand}
+				>
 					<ChevronIcon className="h-4 w-4 shrink-0 text-muted-foreground/50" />
 				</div>
 			)}
@@ -56,6 +109,36 @@ export const Item = ({
 					<span className="tex-xs">clt</span>K
 				</kbd>
 			)}
+			{!!id && (
+				<div className="ml-auto flex  items-center gap-x-2">
+					<DropdownMenu>
+						<DropdownMenuTrigger
+						onClick={(e)=>e.stopPropagation()}
+							asChild>
+							<div>
+								<MoreHorizontal className="h-4 w-4 text-muted-foreground" />
+							</div>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent>
+							<DropdownMenuItem>
+								<Trash className="h-4 w-4 mr-2" />
+								Delete
+							</DropdownMenuItem>
+							<DropdownMenuSeparator />
+							<div>
+								Last edited by: {user?.fullName}
+							</div>
+						</DropdownMenuContent>
+					</DropdownMenu>
+
+				</div>
+			)}
+			<div className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+				role="button"
+				onClick={onCreate}
+			>
+				<Plus className="h-4 w-4 text-muted-foreground"/>
+			</div>
 		</div>
 	);
 };
