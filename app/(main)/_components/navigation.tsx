@@ -1,17 +1,18 @@
 "use client";
 
+import { useSearch } from "@/app/hooks/use-search";
 import { api } from "@/convex/_generated/api";
 import { cn } from "@/lib/utils";
-import { useMutation, useQuery } from "convex/react";
+import { useMutation } from "convex/react";
 import { ChevronLeft, MenuIcon, PlusCircle, Search } from "lucide-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
+import { DocumentList } from "./document-list";
+import { Item } from "./item";
 import Navbar from "./navbar";
 import { UserItem } from "./user-item";
-import { Item } from "./item";
-import { useSearch } from "@/app/hooks/use-search";
 
 const Navigation = () => {
 	const isMobile = useMediaQuery("(max-width: 768px)");
@@ -26,8 +27,6 @@ const Navigation = () => {
 	const navbarRef = useRef<ElementRef<"div">>(null);
 	const [isResetting, setIsResetting] = useState(false);
 	const [isCollapsed, setIsCollapsed] = useState(isMobile);
-
-	const data = useQuery(api.documents.get);
 
 	useEffect(() => {
 		if (isMobile) {
@@ -134,17 +133,11 @@ const Navigation = () => {
 				</div>
 				<div>
 					<UserItem />
-					<Item
-						label="Search"
-						icon={Search}
-						isSearch
-						onClick={search.onOpen}
-					/>
-					<Item
-						onClick={handleCreate}
-						icon={PlusCircle}
-						label="new Page"
-					/>
+					<Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
+					<Item onClick={handleCreate} icon={PlusCircle} label="new Page" />
+				</div>
+				<div className="mt-4">
+					<DocumentList />
 				</div>
 				<div
 					onMouseDown={handleMouseDown}
