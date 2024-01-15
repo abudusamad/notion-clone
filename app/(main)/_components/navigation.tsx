@@ -15,6 +15,7 @@ import {
 	Plus,
 	PlusCircle,
 	Search,
+	Settings,
 	Trash,
 } from "lucide-react";
 import {
@@ -155,6 +156,7 @@ const Navigation = () => {
 				<div>
 					<UserItem />
 					<Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
+					<Item label="Settings" icon={Settings}/>
 					<Item onClick={handleCreate} icon={PlusCircle} label="new Page" />
 				</div>
 				<div className="mt-4">
