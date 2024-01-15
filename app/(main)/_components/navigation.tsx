@@ -35,6 +35,7 @@ import { DocumentList } from "./document-list";
 import { Item } from "./item";
 import Navbar from "./navbar";
 import { UserItem } from "./user-item";
+import { useSetting } from "@/app/hooks/use-setting";
 
 const Navigation = () => {
 	const isMobile = useMediaQuery("(max-width: 768px)");
@@ -43,6 +44,7 @@ const Navigation = () => {
 	const router = useRouter();
 	const create = useMutation(api.documents.create);
 	const search = useSearch();
+	const settings = useSetting();
 
 	const isResizingRef = useRef(false);
 	const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -156,7 +158,7 @@ const Navigation = () => {
 				<div>
 					<UserItem />
 					<Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
-					<Item label="Settings" icon={Settings}/>
+					<Item label="Settings" icon={Settings} onClick={settings.onOpen}/>
 					<Item onClick={handleCreate} icon={PlusCircle} label="new Page" />
 				</div>
 				<div className="mt-4">
