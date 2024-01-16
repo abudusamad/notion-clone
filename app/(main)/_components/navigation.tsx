@@ -61,6 +61,15 @@ const Navigation = () => {
 		}
 	}, [pathname, isMobile]);
 
+	useEffect(() => {
+		const sidebarIsCollapsed = localStorage.getItem("sidebarIsCollapsed");
+		if (sidebarIsCollapsed === "true") {
+			collapse();
+		}else{
+			resetWidth()
+		}
+	}, []);
+
 	const handleMouseDown = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>
 	) => {
@@ -99,6 +108,8 @@ const Navigation = () => {
 			setIsCollapsed(false);
 			setIsResetting(true);
 
+			localStorage.setItem('sidebarIsCollapsed', 'false')
+
 			const sidebarWidth = localStorage.getItem("sidebarWidth") || (isMobile ? "100%" : "240px");
 
 			sidebarRef.current.style.width = sidebarWidth;
@@ -115,6 +126,8 @@ const Navigation = () => {
 		if (sidebarRef.current && navbarRef.current) {
 			setIsCollapsed(true);
 			setIsResetting(true);
+
+			localStorage.setItem("sidebarIsCollapsed", "true");
 
 			sidebarRef.current.style.width = "0";
 			navbarRef.current.style.setProperty("width", "100%");

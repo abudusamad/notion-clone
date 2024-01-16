@@ -29,7 +29,7 @@ export const UpdatePopover = ({
 	}
 	return (
 		<Popover open={isOpen} onOpenChange={onClose}>
-			<PopoverContent className="w-80">
+			<PopoverContent className="w-80" asChild >
 				<div className="flex flex-col gap-y-2">
 					<div className="flex items-center justify-between">
 						<h3 className="text-lg font-medium">Update</h3>
