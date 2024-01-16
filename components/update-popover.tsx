@@ -4,14 +4,25 @@ import { useUpdate } from "@/app/hooks/use-update";
 import { useEffect, useState } from "react";
 import { Popover, PopoverContent } from "./ui/popover";
 
-export const UpdatePopover = () => {
+interface UpdatePopoverProps {
+	side?: "left" | "right" | "top" | "bottom";
+	sideOffset?: number;
+	align?: "start" | "center" | "end";
+}
+
+export const UpdatePopover = ({
+	side = "right",
+	sideOffset = 0,
+	align = "start",
+}: UpdatePopoverProps ) => {
 	const [isMounted, setIsMounted] = useState(false);
+
 	const isOpen = useUpdate((store) => store.isOpen);
 	const onClose = useUpdate((store) => store.onClose);
 
 	useEffect(() => {
 		setIsMounted(true);
-	}, [isMounted]);
+	}, []);
 
 	if (!isMounted) {
 		return null;
