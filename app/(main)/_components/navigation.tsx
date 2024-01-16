@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearch } from "@/app/hooks/use-search";
+import { useSetting } from "@/app/hooks/use-setting";
 import {
 	Popover,
 	PopoverContent,
@@ -11,6 +12,7 @@ import { cn } from "@/lib/utils";
 import { useMutation } from "convex/react";
 import {
 	ChevronLeft,
+	Clock8,
 	MenuIcon,
 	Plus,
 	PlusCircle,
@@ -18,24 +20,15 @@ import {
 	Settings,
 	Trash,
 } from "lucide-react";
-import {
-	useParams,
-	usePathname,
-	useRouter
-} from "next/navigation";
-import {
-	ElementRef,
-	useEffect,
-	useRef,
-	useState
-} from "react";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import { ElementRef, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
 import { DocumentList } from "./document-list";
 import { Item } from "./item";
 import Navbar from "./navbar";
 import { UserItem } from "./user-item";
-import { useSetting } from "@/app/hooks/use-setting";
+import { useUpdate } from "@/app/hooks/use-update";
 
 const Navigation = () => {
 	const isMobile = useMediaQuery("(max-width: 768px)");
@@ -45,6 +38,7 @@ const Navigation = () => {
 	const create = useMutation(api.documents.create);
 	const search = useSearch();
 	const settings = useSetting();
+	const update = useUpdate();
 
 	const isResizingRef = useRef(false);
 	const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -140,7 +134,7 @@ const Navigation = () => {
 			<aside
 				ref={sidebarRef}
 				className={cn(
-					"group/sidebar h-full bg-secondary  dark:bg-[#000000] overflow-y-auto relative flex w-60 flex-col z-[99999]",
+					"group/sidebar h-full bg-[#f2f2f2] dark:bg-[#090909] overflow-y-auto relative flex w-60 flex-col z-[99999]",
 					isResetting && "transition-all ease-in-out duration-300",
 					isMobile && "w-0"
 				)}
@@ -158,7 +152,12 @@ const Navigation = () => {
 				<div>
 					<UserItem />
 					<Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
-					<Item label="Settings" icon={Settings} onClick={settings.onOpen} />
+					<Item label="Update" icon={Clock8}  onClick={update.onOpen} />
+					<Item
+						label="Settings & members"
+						icon={Settings}
+						onClick={settings.onOpen}
+					/>
 					<Item onClick={handleCreate} icon={PlusCircle} label="new Page" />
 				</div>
 				<div className="mt-4">
