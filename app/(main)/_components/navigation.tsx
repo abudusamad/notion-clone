@@ -88,6 +88,10 @@ const Navigation = () => {
 		isResizingRef.current = false;
 		document.removeEventListener("mousemove", handleMouseMove);
 		document.removeEventListener("mouseup", handleMouseUp);
+
+		if (sidebarRef.current) {
+			localStorage.setItem("sidebarWidth", sidebarRef.current.style.width);
+		}
 	};
 
 	const resetWidth = () => {
@@ -95,12 +99,14 @@ const Navigation = () => {
 			setIsCollapsed(false);
 			setIsResetting(true);
 
-			sidebarRef.current.style.width = isMobile ? "100%" : "240px";
+			const sidebarWidth = localStorage.getItem("sidebarWidth") || (isMobile ? "100%" : "240px");
+
+			sidebarRef.current.style.width = sidebarWidth;
 			navbarRef.current.style.setProperty(
 				"width",
-				isMobile ? "0" : "calc(100% - 240px)"
+				isMobile ? "0" : `calc(100% - ${sidebarWidth})`
 			);
-			navbarRef.current.style.setProperty("left", isMobile ? "100%" : "240px");
+			navbarRef.current.style.setProperty("left", isMobile ? "100%" : sidebarWidth);
 			setTimeout(() => setIsResetting(false), 300);
 		}
 	};
