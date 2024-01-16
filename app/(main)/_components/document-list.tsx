@@ -63,7 +63,7 @@ export const DocumentList = ({
 			<p
 				style={{ paddingLeft: level ? `${level * 12 + 25}px` : undefined }}
 				className={cn(
-					"hidden text-xs font-medium text-muted-foreground/80 ",
+					"hidden text-xs font-medium text-muted-foreground/80 py-4",
 					expanded && Object.keys(expanded).length === 0 && "last:block",
 					level === 0 && "hidden"
 				)}
@@ -73,6 +73,7 @@ export const DocumentList = ({
 			{documents.map((document) => (
 				<div key={document._id}>
 					<Item
+						id={document._id}
 						level={level}
 						label={document.title}
 						onClick={() => onRedirect(document._id)}

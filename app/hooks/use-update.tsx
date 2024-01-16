@@ -7,7 +7,7 @@ type UpdateStore = {
 };
 
 export const useUpdate = create<UpdateStore>((set) => ({
-	isOpen: false,
+	isOpen: true,
 	onOpen: () => set({ isOpen: true }),
 	onClose: () => set({ isOpen: false }),
 }));

@@ -14,7 +14,7 @@ export const UpdatePopover = ({
 	side = "right",
 	sideOffset = 0,
 	align = "start",
-}: UpdatePopoverProps ) => {
+}: UpdatePopoverProps) => {
 	const [isMounted, setIsMounted] = useState(false);
 
 	const isOpen = useUpdate((store) => store.isOpen);
@@ -29,7 +29,12 @@ export const UpdatePopover = ({
 	}
 	return (
 		<Popover open={isOpen} onOpenChange={onClose}>
-			<PopoverContent className="w-80" asChild >
+			<PopoverContent
+				className="w-80 pt-3"
+				align={align}
+				side={side}
+				sideOffset={sideOffset}
+			>
 				<div className="flex flex-col gap-y-2">
 					<div className="flex items-center justify-between">
 						<h3 className="text-lg font-medium">Update</h3>

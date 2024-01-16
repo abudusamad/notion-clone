@@ -1,17 +1,8 @@
 "use client";
 
-import { useSearch } from "@/app/hooks/use-search";
-import { useSetting } from "@/app/hooks/use-setting";
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from "@/components/ui/popover";
-import { api } from "@/convex/_generated/api";
-import { cn } from "@/lib/utils";
 import { useMutation } from "convex/react";
 import {
-	ChevronLeft,
+	ChevronsLeft,
 	Clock8,
 	MenuIcon,
 	Plus,
@@ -24,21 +15,30 @@ import { useParams, usePathname, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useMediaQuery } from "usehooks-ts";
+
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
+import { api } from "@/convex/_generated/api";
+import { cn } from "@/lib/utils";
+
+import { useSearch } from "@/app/hooks/use-search";
+import { useSetting } from "@/app/hooks/use-setting";
 import { DocumentList } from "./document-list";
 import { Item } from "./item";
 import Navbar from "./navbar";
 import { UserItem } from "./user-item";
-import { useUpdate } from "@/app/hooks/use-update";
 
-const Navigation = () => {
-	const isMobile = useMediaQuery("(max-width: 768px)");
-	const pathname = usePathname();
-	const params = useParams();
+export const Navigation = () => {
 	const router = useRouter();
-	const create = useMutation(api.documents.create);
-	const search = useSearch();
 	const settings = useSetting();
-	const update = useUpdate();
+	const search = useSearch();
+	const params = useParams();
+	const pathname = usePathname();
+	const isMobile = useMediaQuery("(max-width: 768px)");
+	const create = useMutation(api.documents.create);
 
 	const isResizingRef = useRef(false);
 	const sidebarRef = useRef<ElementRef<"aside">>(null);
@@ -52,7 +52,6 @@ const Navigation = () => {
 		} else {
 			resetWidth();
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isMobile]);
 
 	useEffect(() => {
@@ -60,15 +59,6 @@ const Navigation = () => {
 			collapse();
 		}
 	}, [pathname, isMobile]);
-
-	useEffect(() => {
-		const sidebarIsCollapsed = localStorage.getItem("sidebarIsCollapsed");
-		if (sidebarIsCollapsed === "true") {
-			collapse();
-		}else{
-			resetWidth()
-		}
-	}, []);
 
 	const handleMouseDown = (
 		event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -84,23 +74,24 @@ const Navigation = () => {
 	const handleMouseMove = (event: MouseEvent) => {
 		if (!isResizingRef.current) return;
 		let newWidth = event.clientX;
+
 		if (newWidth < 240) newWidth = 240;
 		if (newWidth > 480) newWidth = 480;
 
 		if (sidebarRef.current && navbarRef.current) {
 			sidebarRef.current.style.width = `${newWidth}px`;
-			navbarRef.current.style.width = `calc(100% - ${newWidth}px)`;
+			navbarRef.current.style.setProperty("left", `${newWidth}px`);
+			navbarRef.current.style.setProperty(
+				"width",
+				`calc(100% - ${newWidth}px)`
+			);
 		}
 	};
 
-	const handleMouseUp = (event: MouseEvent) => {
+	const handleMouseUp = () => {
 		isResizingRef.current = false;
 		document.removeEventListener("mousemove", handleMouseMove);
 		document.removeEventListener("mouseup", handleMouseUp);
-
-		if (sidebarRef.current) {
-			localStorage.setItem("sidebarWidth", sidebarRef.current.style.width);
-		}
 	};
 
 	const resetWidth = () => {
@@ -108,16 +99,12 @@ const Navigation = () => {
 			setIsCollapsed(false);
 			setIsResetting(true);
 
-			localStorage.setItem('sidebarIsCollapsed', 'false')
-
-			const sidebarWidth = localStorage.getItem("sidebarWidth") || (isMobile ? "100%" : "240px");
-
-			sidebarRef.current.style.width = sidebarWidth;
+			sidebarRef.current.style.width = isMobile ? "100%" : "240px";
 			navbarRef.current.style.setProperty(
 				"width",
-				isMobile ? "0" : `calc(100% - ${sidebarWidth})`
+				isMobile ? "0" : "calc(100% - 240px)"
 			);
-			navbarRef.current.style.setProperty("left", isMobile ? "100%" : sidebarWidth);
+			navbarRef.current.style.setProperty("left", isMobile ? "100%" : "240px");
 			setTimeout(() => setIsResetting(false), 300);
 		}
 	};
@@ -127,8 +114,6 @@ const Navigation = () => {
 			setIsCollapsed(true);
 			setIsResetting(true);
 
-			localStorage.setItem("sidebarIsCollapsed", "true");
-
 			sidebarRef.current.style.width = "0";
 			navbarRef.current.style.setProperty("width", "100%");
 			navbarRef.current.style.setProperty("left", "0");
@@ -137,14 +122,14 @@ const Navigation = () => {
 	};
 
 	const handleCreate = () => {
-		const promise = create({ title: "Untilted" }).then((documentId) =>
+		const promise = create({ title: "Untitled" }).then((documentId) =>
 			router.push(`/documents/${documentId}`)
 		);
 
 		toast.promise(promise, {
-			loading: "Creating document...",
-			success: "Document created!",
-			error: "Error creating document",
+			loading: "Creating a new note...",
+			success: "New note created!",
+			error: "Failed to create a new note.",
 		});
 	};
 
@@ -153,35 +138,33 @@ const Navigation = () => {
 			<aside
 				ref={sidebarRef}
 				className={cn(
-					"group/sidebar h-full bg-[#f2f2f2] dark:bg-[#090909] overflow-y-auto relative flex w-60 flex-col z-[99999]",
+					"group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999]",
 					isResetting && "transition-all ease-in-out duration-300",
 					isMobile && "w-0"
 				)}
 			>
 				<div
-					role="button"
 					onClick={collapse}
+					role="button"
 					className={cn(
-						"h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute right-3 top-2 opacity-0 group-hover/sidebar:opacity-100 transition",
+						"h-6 w-6 text-muted-foreground rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600 absolute top-3 right-2 opacity-0 group-hover/sidebar:opacity-100 transition",
 						isMobile && "opacity-100"
 					)}
 				>
-					<ChevronLeft className="h-6 w-6" />
+					<ChevronsLeft className="h-6 w-6" />
 				</div>
 				<div>
 					<UserItem />
 					<Item label="Search" icon={Search} isSearch onClick={search.onOpen} />
-					<Item label="Update" icon={Clock8}  onClick={update.onOpen} />
-					<Item
-						label="Settings & members"
-						icon={Settings}
-						onClick={settings.onOpen}
-					/>
-					<Item onClick={handleCreate} icon={PlusCircle} label="new Page" />
+
+					<Item label="Update" icon={Clock8} />
+
+					<Item label="Settings" icon={Settings} onClick={settings.onOpen} />
+					<Item onClick={handleCreate} label="New page" icon={PlusCircle} />
 				</div>
 				<div className="mt-4">
 					<DocumentList />
-					<Item label="Add a page" icon={Plus} onClick={handleCreate} />
+					<Item onClick={handleCreate} icon={Plus} label="Add a page" />
 					<Popover>
 						<PopoverTrigger className="w-full mt-4">
 							<Item label="Trash" icon={Trash} />
@@ -225,5 +208,3 @@ const Navigation = () => {
 		</>
 	);
 };
-
-export default Navigation;
