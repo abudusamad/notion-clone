@@ -1,4 +1,3 @@
-/* trunk-ignore-all(prettier) */
 "use client";
 
 import {
