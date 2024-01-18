@@ -40,7 +40,7 @@ export const DocumentList = ({
 
 	const onRedirect = useCallback(
 		(documentId: string) => {
-			router.push(`/document/${documentId}`);
+			router.push(`/documents/${documentId}`);
 		},
 		[router]
 	);
