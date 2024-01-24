@@ -6,7 +6,7 @@ import { api } from "@/convex/_generated/api";
 import { Doc } from "@/convex/_generated/dataModel";
 import { useMutation } from "convex/react";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 interface TitleProps {
 	initialData: Doc<"documents">;
 }
@@ -17,10 +17,6 @@ export const Title = ({ initialData }: TitleProps) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const [title, setTitle] = useState(initialData.title || "Untitled");
 	const [isEditing, setIsEditing] = useState(false);
-
-	useEffect(() => {
-		setTitle(initialData.title || "Untitled");
-	}, [initialData.title]);
 
 	const enbbleInput = () => {
 		setTitle(initialData.title);
@@ -60,10 +56,19 @@ export const Title = ({ initialData }: TitleProps) => {
 					className="h-7 px-2 focus-visible:ring-transparent"
 				/>
 			) : (
-				<Button>
-					<span>{initialData?.title}</span>
+				<Button
+					size="sm"
+					variant="ghost"
+					onClick={enbbleInput}
+					className="font-normal h-auto p-1"
+				>
+					<span className="truncate">{initialData?.title}</span>
 				</Button>
 			)}
 		</div>
 	);
+};
+
+Title.Skeleton = function Skeleton() {
+	return <div className="h-7 w-32 bg-secondary rounded-md animate-pulse" />;
 };
