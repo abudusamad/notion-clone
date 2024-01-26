@@ -197,33 +197,36 @@ export const restore = mutation({
 		await ctx.db.patch(args.id, { isArchived: false });
 		recursiveRestore(args.id);
 	},
-});
+})
 
 export const getById = query({
 	args: { documentId: v.id("documents") },
 	handler: async (ctx, args) => {
 		const identity = await ctx.auth.getUserIdentity();
 
-		if (!identity) {
+		const document = await ctx.db.get(args.documentId);
+
+		if(!document) {
+			throw new Error("Document not found");
+		}
+
+		if(document.isPublished && !document.isArchived) {
+			return document;
+		}
+
+		if(!identity) {
 			throw new Error("Not authenticated");
 		}
 
 		const userId = identity.subject;
 
-		const document = await ctx.db.get(args.documentId);
-		if (document?.isPublished && !document.isArchived) {
-			return document;
-		}
-
-		if (!document) {
-			throw new Error("Document not found");
-		}
-		if (document.userId !== userId) {
+		if(document.userId !== userId) {
 			throw new Error("Unauthorized");
 		}
 
 		return document;
-	},
+
+	}
 })
 
 

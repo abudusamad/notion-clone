@@ -1,7 +1,7 @@
 const DocumnetIdPage = () => {
     return (
-        <div className="pb-40">
-          <Cover/>
+      <div className="pb-40">
+        Document Id Page
         </div>
       );
 }
