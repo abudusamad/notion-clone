@@ -1,11 +1,12 @@
 import { siteConfig } from "@/config/site";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { ConvexClientProvider } from "./Providers/convex-provider";
-import { ThemeProvider } from "./Providers/theme-provider";
 import { Toaster } from "sonner";
+import { ConvexClientProvider } from "./Providers/convex-provider";
 import { ModalProvider } from "./Providers/modal-provider";
+import { ThemeProvider } from "./Providers/theme-provider";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,17 +34,19 @@ export default function RootLayout({
 		<html lang="en" suppressHydrationWarning>
 			<body className={inter.className}>
 				<ConvexClientProvider>
-					<ThemeProvider
-						attribute="class"
-						defaultTheme="system"
-						enableSystem
-						disableTransitionOnChange
-						storageKey="notion-theme"
-					>
-						<Toaster position="bottom-center" />
-						<ModalProvider/>
-					{children}
-					</ThemeProvider>
+					<EdgeStoreProvider>
+						<ThemeProvider
+							attribute="class"
+							defaultTheme="system"
+							enableSystem
+							disableTransitionOnChange
+							storageKey="notion-theme"
+						>
+							<Toaster position="bottom-center" />
+							<ModalProvider />
+							{children}
+						</ThemeProvider>
+					</EdgeStoreProvider>
 				</ConvexClientProvider>
 			</body>
 		</html>
