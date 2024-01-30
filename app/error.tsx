@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -23,7 +24,12 @@ const Error = () => {
 			/>
 			<h2 className="text-xl font-medium">Something went wrong</h2>
 			<Button asChild>
-				<Link href="/documents">Go back</Link>
+				<Link href="/documents">
+					<span className="mr-2">
+						<ArrowLeft className="h-5 w-5 mr-2" />
+					</span>
+					Go back
+				</Link>
 			</Button>
 		</div>
 	);
