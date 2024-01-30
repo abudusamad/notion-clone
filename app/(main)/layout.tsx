@@ -5,12 +5,14 @@ import { Spinner } from "@/components/spinner";
 import { UpdatePopover } from "@/components/update-popover";
 import Layout from "@/config/Layout";
 import { useConvexAuth } from "convex/react";
-import { redirect } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { Navigation } from "./_components/navigation";
 
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
 	const { isAuthenticated, isLoading } = useConvexAuth();
+	const pathname = usePathname();
+	const router = useRouter();
 	if (isLoading) {
 		<div className="h-full flex items-center justify-center">
 			<Spinner size="lg" />

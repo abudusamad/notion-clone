@@ -1,26 +1,41 @@
-"use client";
-
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { debounce, throttle } from "lodash";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
 	const router = useRouter();
 	const pathname = usePathname();
 
-	useEffect(() => {
-		// Save the current page state to localStorage
-		localStorage.setItem("currentPage", pathname);
-	}, [pathname]);
+	// Debounce localStorage updates
+	const debouncedSavePage = debounce((page) => {
+		localStorage.setItem("currentPage", page);
+	}, 500);
 
 	useEffect(() => {
-		// Retrieve the last saved page from localStorage
+		debouncedSavePage(pathname);
+		return () => {
+			// Clean up on unmount
+			localStorage.removeItem("currentPage");
+			debouncedSavePage.cancel(); // Cancel any pending debounced updates
+		};
+	}, [pathname, debouncedSavePage]);
+
+	// Throttle router.push calls
+	const throttledNavigate = throttle((page) => {
+		router.push(page);
+	}, 1000);
+
+	useEffect(() => {
 		const lastPage = localStorage.getItem("currentPage");
 
 		if (lastPage && lastPage !== pathname) {
-			// Navigate to the last saved page
-			router.push(lastPage);
+			throttledNavigate(lastPage);
 		}
-	}, [pathname, router]);
+
+		return () => {
+			throttledNavigate.cancel(); // Cancel any pending throttled navigations
+		};
+	}, [pathname, router , throttledNavigate]);
 
 	return <>{children}</>;
 };
