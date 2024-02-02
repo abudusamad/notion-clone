@@ -41,7 +41,7 @@ export const CoverImage = ({ url, preview }: CoverImageProps) => {
 			{!!url && (
 				<Image src={url} alt="Cover Image" className="object-cover " fill />
 			)}
-			{!!url && preview && (
+			{url && !preview && (
 				<div className="opacity-0 group-hover:opacity-100 absolute top-16 right-1/4 flex items-center  ">
 					<Button
 						onClick={() => coveImage.onReplace(url)}

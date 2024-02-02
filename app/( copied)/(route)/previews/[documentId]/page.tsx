@@ -6,6 +6,8 @@ import { Toolbar } from "@/components/toolbar";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
+import dynamic from "next/dynamic";
+import { useMemo } from "react";
 
 interface DocumentIdPageProps {
 	params: {
@@ -33,11 +35,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
 	};
 
 	if (document === undefined) {
-		return (
-			<div className="flex items-center justify-center h-screen w-scree text-gray-800 dark:text-gray-100">
-				loading ....
-			</div>
-		);
+		return <div>loading ....</div>;
 	}
 
 	if (document === null) {
@@ -45,7 +43,7 @@ const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
 	}
 	return (
 		<div className="pb-40">
-			<CoverImage url={document.coverImage} />
+			<CoverImage preview url={document.coverImage} />
 			<div className="md:max-w-3xl lg:max-w-4xl mx-auto mt-5">
 				<Toolbar initialData={document} />
 				<Editor initialContent={document.content} onChange={onChange} />
