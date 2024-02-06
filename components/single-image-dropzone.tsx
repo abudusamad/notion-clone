@@ -130,7 +130,6 @@ const SingleImageDropzone = React.forwardRef<HTMLInputElement, InputProps>(
 						},
 					})}
 				>
-					{/* Main File Input */}
 					<input ref={ref} {...getInputProps()} />
 
 					{imageUrl ? (
