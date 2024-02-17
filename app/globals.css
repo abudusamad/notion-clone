@@ -9,6 +9,7 @@ body,
 }
 
 
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -65,9 +66,10 @@ body,
   }
 }
 
+
 @font-face {
   font-family: "Switzer-Black";
-  src: url("/assets/fonts/Switzer-Black.woff2") format("woff2"),
+  src: url("../assets/fonts/Switzer-Black.woff2") format("woff2"),
     url("../assets/fonts/Switzer-Black.woff") format("woff"),
     url("../assets/fonts/Switzer-Black.ttf") format("truetype");
   font-weight: 900;
