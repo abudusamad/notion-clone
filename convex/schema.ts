@@ -14,4 +14,32 @@ export default defineSchema({
 	})
 		.index("by_user", ["userId"])
 		.index("by_user_parent", ["userId", "parentDocument"]),
+
+	chats: defineTable({
+		userId: v.string(),
+		documentId: v.id("documents"),
+		message: v.string(),
+		userName: v.string(),
+		isArchived: v.boolean(),
+	})
+		.index("by_document", ["documentId"])
+		.index("by_user", ["userId"]),
+
+	homeChat: defineTable({
+		userId: v.string(),
+		message: v.string(),
+		userName: v.string(),
+		isArchived: v.boolean(),
+	}).index("by_user", ["userId"]),
+
+	presence: defineTable({
+		userId: v.string(),
+		lastSeen: v.number(),
+		location: v.optional(v.string()),
+		userPicture: v.optional(v.string()),
+		userName: v.optional(v.string()),
+	})
+		.index("by_user", ["userId"])
+		.index("by_location", ["location"])
+		.index("by_lastSeen", ["lastSeen"]),
 });
