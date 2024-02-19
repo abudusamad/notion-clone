@@ -38,6 +38,7 @@ export default defineSchema({
 		location: v.optional(v.string()),
 		userPicture: v.optional(v.string()),
 		userName: v.optional(v.string()),
+		lastActive: v.number(),
 	})
 		.index("by_user", ["userId"])
 		.index("by_location", ["location"])
