@@ -1,11 +1,18 @@
+"use client";
+
+import { useChat } from "@/app/hooks/use-chat";
 import { Button } from "./ui/button";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import { ScrollArea } from "./ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
+import { useState } from "react";
+import { Input } from "./ui/input";
+
 
 export const HomeChat = () => {
-	return (
-		<Sheet defaultOpen>
+    const [message, setMessage] = useState("");
+    return (
+        <Sheet defaultOpen>
 			<SheetTrigger asChild defaultChecked>
 				<Button
 					variant="ghost"
@@ -13,7 +20,7 @@ export const HomeChat = () => {
 					className="text-muted-foreground rounded-full hover:bg-zinc-300 dark:hover:selection:bg-gray-600 hover:text-indigo-700 dark:hover:text-zinc-100"
 				>
 					{""}
-					<HoverCard>
+					<HoverCard >
 						<HoverCardTrigger>
 							<svg
 								className=" h-6 w-6 stroke-1"
@@ -38,9 +45,24 @@ export const HomeChat = () => {
 				</Button>
             </SheetTrigger>
             <SheetContent>
-                <ScrollArea>
+                <ScrollArea className="border-none max-h-[70vh] overflow-y-auto px-5 bg-text-muted w-full transition flex tex-sm flex-col shadow-none ">
+            <h1>Oops look like you have not started chatting</h1>
                     
-            </ScrollArea>
+                </ScrollArea>
+                <Input
+                    type="text"
+                    disabled={false}
+                    className="mt-5"
+                    placeholder="Send a message to get started"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            e.preventDefault();
+                            setMessage("");
+                        }
+                    }}
+                />
             </SheetContent>
 		</Sheet>
 	);
