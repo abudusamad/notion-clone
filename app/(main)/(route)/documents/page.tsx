@@ -33,9 +33,9 @@ const DocumentsPage = () => {
 	return (
 		<div className="h-full flex flex-col items-center justify-center space-y-4">
 			<Image
-				src="/empty.png"
-				height="300"
-				width="300"
+				src="/dashboard.png"
+				height="600"
+				width="600"
 				alt="Empty"
 				className="dark:hidden"
 			/>
