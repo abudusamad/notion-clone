@@ -2,7 +2,9 @@ import { useParams } from "next/navigation";
 import { Card } from "./ui/card"
 import { Separator } from "./ui/separator"
 import { HomeChat } from "./home-chat";
-import { AvatartSlack } from "./avatar-slack";
+import { AvatartStack } from "./avatar-stack";
+import { AvatarDisplay } from "./avatar-display";
+
 
 interface AvatarCardProps {
     nameOfSpace: string;
@@ -20,7 +22,7 @@ export const AvatarCard = ({ nameOfSpace }: AvatarCardProps) => {
                      mx-2"
             
             />
-            <AvatartSlack/>
+           <AvatarDisplay />
         </Card>
     )
 }
