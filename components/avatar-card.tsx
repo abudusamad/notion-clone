@@ -22,7 +22,7 @@ export const AvatarCard = ({ nameOfSpace }: AvatarCardProps) => {
                      mx-2"
             
             />
-           <AvatarDisplay />
+            <AvatartStack nameOfSpace={ nameOfSpace} />
         </Card>
     )
 }
