@@ -46,7 +46,7 @@ export const Heading = () => {
 				<Button
 					asChild
 					variant="outline"
-					className="bg-inherit border-indigo-500"
+					className="bg-inherit border-indigo-500 rounded-md"
 				>
 					<Link href="/documents">
 						Enter Notion Extended
@@ -56,7 +56,7 @@ export const Heading = () => {
 			)}
 			{!isAuthenticated && !isLoading && (
 				<SignInButton mode="modal">
-					<Button>
+					<Button >
 						Get Jotion Extended free
 						<ArrowRight className="h-4 w-4 ml-2" />
 					</Button>
