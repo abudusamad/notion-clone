@@ -9,6 +9,7 @@ import { Spinner } from "@/components/spinner";
 
 export const Heading = () => {
 	const { isAuthenticated, isLoading } = useConvexAuth();
+	const date = new Date();
 
 	return (
 		<div className="max-w-3xl space-y-4 mt-3 md:text-left">
@@ -26,7 +27,7 @@ export const Heading = () => {
 					target="_blank"
 					className="hover:cursor-pointer bg-gradient-to-r bg-clip-text text-transparent from-blue-100 via-purple-500 to-red-900 animate-text"
 				>
-					Convex Build Bounty 2023
+					Convex Build Bounty `${ date.getFullYear()}`
 				</a>
 			</h3>
 			<h3 className="text-base sm:text-xl md:text-2xl font-switzerMedium">
