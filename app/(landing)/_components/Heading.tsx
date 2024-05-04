@@ -13,24 +13,24 @@ export const Heading = () => {
 
 	return (
 		<div className="max-w-3xl space-y-4 mt-3 md:text-left">
-			<h1 className="text-lg sm:text-xl md:text-3xl font-switzerSemibold">
+			<h1 className="text-6xl sm:text-xl md:text-3xl font-switzerSemibold">
 				Jotion Extended is a{" "}
 				<span className="bg-gradient-to-r bg-clip-text text-transparent from-yellow-500 via-purple-500 to-red-500 animate-text">
 					realtime collaborative
 				</span>
 				&nbsp; workspace
 			</h1>
-			<h3 className="text-base sm:text-xl md:text-2xl font-switzerMedium ">
+			<h3 className="text-4xl sm:text-xl md:text-3xl font-switzerMedium ">
 				Jotion Extended is my submission for <br />
 				<a
 					href="https://stack.convex.dev/build-bounty-jotion/"
 					target="_blank"
 					className="hover:cursor-pointer bg-gradient-to-r bg-clip-text text-transparent from-blue-100 via-purple-500 to-red-900 animate-text"
 				>
-					Convex Build Bounty `${ date.getFullYear()}`
+					Convex Build Bounty {date.getFullYear()}
 				</a>
 			</h3>
-			<h3 className="text-base sm:text-xl md:text-2xl font-switzerMedium">
+			<h3 className="text-3xl sm:text-xl md:text-2xl font-switzerMedium">
 				Jotion Extended is made possible by <br />
 				<span className="bg-gradient-to-r bg-clip-text text-transparent from-yellow-500 via-purple-500 to-red-500 animate-text">
 					Convex
