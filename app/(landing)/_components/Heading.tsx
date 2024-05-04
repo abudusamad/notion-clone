@@ -14,14 +14,14 @@ export const Heading = () => {
 	return (
 		<div className="max-w-3xl space-y-4 mt-3 md:text-left">
 			<h1 className="text-6xl sm:text-xl md:text-3xl font-switzerSemibold">
-				Jotion Extended is a{" "}
+				Notion Extended is a{" "}
 				<span className="bg-gradient-to-r bg-clip-text text-transparent from-yellow-500 via-purple-500 to-red-500 animate-text">
 					realtime collaborative
 				</span>
 				&nbsp; workspace
 			</h1>
 			<h3 className="text-4xl sm:text-xl md:text-3xl font-switzerMedium ">
-				Jotion Extended is my submission for <br />
+				Notion Extended is my submission for <br />
 				<a
 					href="https://stack.convex.dev/build-bounty-jotion/"
 					target="_blank"
@@ -31,7 +31,7 @@ export const Heading = () => {
 				</a>
 			</h3>
 			<h3 className="text-3xl sm:text-xl md:text-2xl font-switzerMedium">
-				Jotion Extended is made possible by <br />
+				Notion Extended is made possible by <br />
 				<span className="bg-gradient-to-r bg-clip-text text-transparent from-yellow-500 via-purple-500 to-red-500 animate-text">
 					Convex
 				</span>{" "}
@@ -49,7 +49,7 @@ export const Heading = () => {
 					className="bg-inherit border-indigo-500"
 				>
 					<Link href="/documents">
-						Enter Jotion Extended
+						Enter Notion Extended
 						<ArrowRight className="h-4 w-4 ml-2" />
 					</Link>
 				</Button>
