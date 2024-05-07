@@ -1,23 +1,5 @@
 # Next.js 14 Notion
 
-<!-- GitHub badges -->
-
-[![Latest release](https://img.shields.io/github/v/release/ladunjexa/nextjs14-notion?label=Latest%20release&style=social)](https://github.com/ladunjexa/nextjs14-notion/releases/tag/v0.1.0)
-[![Stars](https://img.shields.io/github/stars/ladunjexa/nextjs14-notion?style=social)](https://github.com/ladunjexa/nextjs14-notion/stargazers)
-[![Fork](https://img.shields.io/github/forks/ladunjexa/nextjs14-notion?style=social)](https://github.com/ladunjexa/nextjs14-notion/forks)
-[![GitHub commits](https://img.shields.io/github/commit-activity/t/ladunjexa/nextjs14-notion?style=social&logo=github)](https://github.com/ladunjexa/nextjs14-notion/commits)
-[![Pull requests](https://img.shields.io/github/issues-pr/ladunjexa/nextjs14-notion?style=social&logo=github)](https://github.com/ladunjexa/nextjs14-notion/pulls)
-
-![demo](https://i.ibb.co/Qm9fb95/nextjs14-notion-vercel-app-1.png)
-
-[![ladunjexa](https://custom-icon-badges.demolab.com/badge/made%20by%20-ladunjexa-556bf2?logo=github&logoColor=white&labelColor=101827)](https://github.com/luadnjexa)
-[![License](https://img.shields.io/github/license/ladunjexa/nextjs14-notion?color=dddddd&labelColor=000000)](https://github.com/ladunjexa/nextjs14-notion/blob/main/LICENSE)
-[![Top Language](https://img.shields.io/github/languages/top/ladunjexa/nextjs14-notion?logo=github&logoColor=%23007ACC&label=TypeScript)](https://www.typescriptlang.org/)
-[![Contributors](https://img.shields.io/github/contributors/ladunjexa/nextjs14-notion?style=flat&color=orange&label=Contributors)](https://github.com/ladunjexa/nextjs14-notion/graphs/contributors)
-![Release](https://img.shields.io/github/release/ladunjexa/nextjs14-notion.svg)
-![PRs](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=shields)
-![deployment](https://img.shields.io/github/deployments/ladunjexa/nextjs14-notion/Production?logo=vercel&label=Website)
-[![Known Vulnerabilities](https://snyk.io/test/github/ladunjexa/nextjs14-notion/badge.svg)](https://snyk.io/test/github/ladunjexa/nextjs14-notion)
 
 ## 🌐 Live Demo
 
@@ -194,7 +176,7 @@ To get this project up and running in your development environment, follow these
 In order to install and run this project locally, you would need to have the following installed on your local machine.
 
 - [Node.js](https://nodejs.org/en/)
-- [NPM](https://www.npmjs.com/get-npm)
+- [NPM](https://www.npmjs.com/get-npm)https://notion-clone-jade-three.vercel.app
 - [Git](https://git-scm.com/downloads)
 
 ### ⚙️ Installation and Run Locally
