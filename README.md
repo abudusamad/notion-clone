@@ -1,5 +1,8 @@
 # Next.js 14 Notion
 
+![demo](/public/Screenshot%20from%202024-05-07%2012-52-00.png)
+
+
 
 ## 🌐 Live Demo
 
