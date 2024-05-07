@@ -5,6 +5,7 @@ import { Toolbar } from "@/components/toolbar";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
+import { Metadata, ResolvingMetadata } from "next";
 import dynamic from "next/dynamic";
 import { useMemo } from "react";
 
@@ -14,9 +15,13 @@ interface DocumentIdPageProps {
 	};
 }
 
+
 const DocumentIdPage = ({ params }: DocumentIdPageProps) => {
 	const Editor = useMemo(
-		() => dynamic(() => import("@/components/editor").then(mod=>mod.Editor), { ssr: false }),
+		() =>
+			dynamic(() => import("@/components/editor").then((mod) => mod.Editor), {
+				ssr: false,
+			}),
 		[]
 	);
 
