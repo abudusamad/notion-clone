@@ -7,48 +7,51 @@ import { ConvexClientProvider } from "./Providers/convex-provider";
 import { ModalProvider } from "./Providers/modal-provider";
 import { ThemeProvider } from "./Providers/theme-provider";
 import "./globals.css";
+import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: {
-		default: siteConfig.name,
-		template: `%s - ${siteConfig.name}`,
-	},
-	description: siteConfig.description,
+  title: {
+    default: siteConfig.name,
+    template: `%s - ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
 
-	icons: [
-		{
-			url: "/notionlogo.png",
-			href: "/notionlogo.png",
-		},
-	],
+  icons: [
+    {
+      url: "/notionlogo.png",
+      href: "/notionlogo.png",
+    },
+  ],
 };
 
 export default function RootLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-	return (
-		<html lang="en" suppressHydrationWarning>
-			<body className={inter.className}>
-				<ConvexClientProvider>
-					<EdgeStoreProvider>
-						<ThemeProvider
-							attribute="class"
-							defaultTheme="system"
-							enableSystem
-							disableTransitionOnChange
-							storageKey="notion-theme"
-						>
-							<Toaster position="bottom-center" />
-							<ModalProvider />
-							{children}
-						</ThemeProvider>
-					</EdgeStoreProvider>
-				</ConvexClientProvider>
-			</body>
-		</html>
-	);
+  return (
+    <ConvexAuthNextjsServerProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={inter.className}>
+          <ConvexClientProvider>
+            <EdgeStoreProvider>
+              <ThemeProvider
+                attribute="class"
+                defaultTheme="system"
+                enableSystem
+                disableTransitionOnChange
+                storageKey="notion-theme"
+              >
+                <Toaster position="bottom-center" />
+                <ModalProvider />
+                {children}
+              </ThemeProvider>
+            </EdgeStoreProvider>
+          </ConvexClientProvider>
+        </body>
+      </html>
+    </ConvexAuthNextjsServerProvider>
+  );
 }
