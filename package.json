@@ -29,7 +29,7 @@
 		"class-variance-authority": "^0.7.0",
 		"clsx": "^2.1.0",
 		"cmdk": "^0.2.0",
-		"convex": "^1.11.3",
+		"convex": "^1.15.0",
 		"emoji-picker-react": "^4.7.8",
 		"lodash": "^4.17.21",
 		"lucide-react": "^0.303.0",
