@@ -28,6 +28,7 @@ export const SignInCard = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const { signIn } = useAuthActions();
   const params = useSearchParams();
   const error = params.get("error");
 
@@ -37,12 +38,11 @@ export const SignInCard = () => {
     setLoadingLogin(true);
   };
 
-  const { signIn } = useAuthActions();
-  const onProviderSignIn = async (provider: "github" | "google") => {
+  const onProviderSignIn = (provider: "github" | "google") => {
     setLoading(true);
     setLoadingGithub(provider === "github");
     setLoadingGoogle(provider === "google");
-    await signIn(provider).finally(() => setLoading(false));
+    signIn(provider).finally(() => setLoading(false));
   };
 
   return (
