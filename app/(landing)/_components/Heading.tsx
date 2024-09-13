@@ -5,6 +5,13 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/spinner";
+import { Poppins } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const fonts = Poppins({
+  subsets: ["latin"],
+  weight: ["600"],
+});
 
 export const Heading = () => {
   const date = new Date();
@@ -44,20 +51,25 @@ export const Heading = () => {
       <Authenticated>
         <Button
           asChild
-          variant="outline"
+          variant="default"
           className="bg-inherit border-indigo-500 rounded-md"
         >
           <Link href="/documents">
-            Enter Notion Extended
+            Go to Documents
             <ArrowRight className="h-4 w-4 ml-2" />
           </Link>
         </Button>
-		  </Authenticated>
-		  
-        <Button variant="outline">
-          <Link href="/signin">Sign In</Link>
+      </Authenticated>
+
+      <Unauthenticated>
+        <Button
+          asChild
+          variant="default"
+          className={cn("rounded-xl text-lg p-6", fonts.className)}
+        >
+          <Link href="/signin">Get Notion free</Link>
         </Button>
-    
+      </Unauthenticated>
     </div>
   );
 };

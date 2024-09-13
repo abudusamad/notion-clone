@@ -27,25 +27,16 @@ const Navbar = () => {
       <div className="md:ml-auto md:justify-end justify-between w-full flex items-center gap-x-2">
         {isLoading && <Spinner />}
         {!isLoading && !isAuthenticated && (
-          <div className={cn(scrolled && "hidden")}>
-            <Button>
-              <Link href="/auth/signin">Sign In</Link>
+          <div className={cn("flex justify-between items-center",scrolled && "hidden")}>
+            <Button variant="outline">
+              <Link href="/signin">Sign In</Link>
             </Button>
-            <Button onClick={() => signOut()} variant="ghost">
+            <Button onClick={() => void signOut()} variant="ghost">
               Sign Out
             </Button>
           </div>
         )}
-        {!isLoading && isAuthenticated && (
-          <>
-            <Button>
-              <Link href="/documents">Documents</Link>
-            </Button>
-            <Button>
-              <Link href="/auth/signout">Sign Out</Link>
-            </Button>
-          </>
-        )}
+      
         <div className="mr-2">
           <ModeToggle />
         </div>
